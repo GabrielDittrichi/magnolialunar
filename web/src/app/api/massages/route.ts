@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 import { getPool, initDB, safeParseArray } from "@/lib/db"
 import { promises as fs } from "fs"
 import path from "path"
+import { revalidatePath } from "next/cache"
+
 const dataPath = path.join(process.cwd(), "src", "data", "massages.json")
 
 export async function GET() {
@@ -102,8 +104,15 @@ export async function DELETE(request: Request) {
     await initDB()
     const pool = getPool()
     await pool.query(`DELETE FROM massages WHERE slug = ?`, [slug])
+    
+    // Revalidate paths to update cache
+    revalidatePath("/massagens")
+    revalidatePath("/admin/massagens")
+    revalidatePath(`/massagens/${slug}`)
+    
     return NextResponse.json({ ok: true })
-  } catch {
+  } catch (error) {
+    console.error("Error deleting massage (MySQL):", error)
     const raw = await fs.readFile(dataPath, "utf-8").catch(() => "[]")
     const data = JSON.parse(raw || "[]")
     const next = data.filter((m: any) => m.slug !== slug)

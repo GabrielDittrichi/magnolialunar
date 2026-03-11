@@ -7,9 +7,16 @@ export default function DeleteButton({ slug }: { slug: string }) {
     if (!slug) return
     if (!confirm("Tem certeza que deseja apagar esta terapeuta?")) return
     setLoading(true)
-    await fetch(`/api/therapists?slug=${encodeURIComponent(slug)}`, { method: "DELETE" })
-    setLoading(false)
-    window.location.reload()
+    try {
+      const res = await fetch(`/api/therapists?slug=${encodeURIComponent(slug)}`, { method: "DELETE" })
+      if (!res.ok) throw new Error("Falha ao apagar")
+      window.location.reload()
+    } catch (error) {
+      console.error(error)
+      alert("Erro ao apagar terapeuta. Tente novamente.")
+    } finally {
+      setLoading(false)
+    }
   }
   return (
     <button

@@ -7,9 +7,16 @@ export default function DeleteMassageButton({ slug }: { slug: string }) {
     if (!slug) return
     if (!confirm("Tem certeza que deseja apagar esta massagem?")) return
     setLoading(true)
-    await fetch(`/api/massages?slug=${encodeURIComponent(slug)}`, { method: "DELETE" })
-    setLoading(false)
-    window.location.reload()
+    try {
+      const res = await fetch(`/api/massages?slug=${encodeURIComponent(slug)}`, { method: "DELETE" })
+      if (!res.ok) throw new Error("Falha ao apagar")
+      window.location.reload()
+    } catch (error) {
+      console.error(error)
+      alert("Erro ao apagar massagem. Tente novamente.")
+    } finally {
+      setLoading(false)
+    }
   }
   return (
     <button
