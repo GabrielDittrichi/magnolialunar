@@ -1,17 +1,10 @@
 import Link from "next/link"
 import TherapistEditForm from "../_edit-form"
-
-async function getTherapists() {
-  const base = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-  const res = await fetch(`${base}/api/therapists`, { cache: "no-store" })
-  if (!res.ok) return []
-  return res.json()
-}
+import { getTherapistBySlug } from "@/lib/db"
 
 export default async function AdminEditTherapistPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const therapists = await getTherapists()
-  const therapist = therapists.find((t: any) => t.slug === slug)
+  const therapist = await getTherapistBySlug(slug)
   return (
     <main className="min-h-screen pt-32 pb-24 bg-white">
       <div className="container mx-auto px-6">

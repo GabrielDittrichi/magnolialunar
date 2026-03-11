@@ -1,17 +1,10 @@
 import Link from "next/link"
 import MassageEditForm from "../_edit-form"
-
-async function getMassages() {
-  const base = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-  const res = await fetch(`${base}/api/massages`, { cache: "no-store" })
-  if (!res.ok) return []
-  return res.json()
-}
+import { getMassageBySlug } from "@/lib/db"
 
 export default async function AdminEditMassagePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const massages = await getMassages()
-  const massage = massages.find((m: any) => m.slug === slug)
+  const massage = await getMassageBySlug(slug)
   return (
     <main className="min-h-screen pt-32 pb-24 bg-white">
       <div className="container mx-auto px-6">
