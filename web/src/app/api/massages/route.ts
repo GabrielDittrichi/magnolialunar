@@ -52,6 +52,11 @@ export async function POST(request: Request) {
       payload.image || "",
       JSON.stringify(payload.therapists || []),
     ])
+
+    revalidatePath("/massagens")
+    revalidatePath("/admin/massagens")
+    revalidatePath(`/massagens/${payload.slug}`)
+
     return NextResponse.json({ ok: true })
   } catch {
     const raw = await fs.readFile(dataPath, "utf-8").catch(() => "[]")
@@ -84,6 +89,11 @@ export async function PUT(request: Request) {
       JSON.stringify(payload.therapists || []),
       payload.slug,
     ])
+
+    revalidatePath("/massagens")
+    revalidatePath("/admin/massagens")
+    revalidatePath(`/massagens/${payload.slug}`)
+
     return NextResponse.json({ ok: true })
   } catch {
     const raw = await fs.readFile(dataPath, "utf-8").catch(() => "[]")

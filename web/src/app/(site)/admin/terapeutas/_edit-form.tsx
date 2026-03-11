@@ -134,7 +134,7 @@ export default function TherapistEditForm({ initial }: { initial: any }) {
         <FormField label="Telefone (WhatsApp)">
           <input value={phone} onChange={e => setPhone(e.target.value)} className="w-full border border-slate-200 p-3 rounded-sm" />
         </FormField>
-        <FormField label="Foto (Upload)">
+        <FormField label="Foto Principal (Capa do Card)">
           <input type="file" accept="image/*" onChange={onImageSelect} className="w-full border border-slate-200 p-3 rounded-sm" />
           {image && (
             <div className="mt-4">
@@ -148,7 +148,7 @@ export default function TherapistEditForm({ initial }: { initial: any }) {
         <FormField label="Descrição / Bio">
           <textarea value={bio} onChange={e => setBio(e.target.value)} className="w-full border border-slate-200 p-3 rounded-sm min-h-32" />
         </FormField>
-        <FormField label="Galeria (Upload múltiplo)">
+        <FormField label="Galeria de Fotos (Extra)">
           <input type="file" accept="image/*" multiple onChange={onGallerySelect} className="w-full border border-slate-200 p-3 rounded-sm" />
           {gallery.length > 0 && (
             <div className="mt-4 grid grid-cols-3 gap-2">
