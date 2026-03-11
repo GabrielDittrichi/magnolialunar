@@ -1,0 +1,32 @@
+export function Hero() {
+  return (
+    <section className="relative flex min-h-[80vh] flex-col justify-end px-4 pb-10 pt-24 text-slate-50">
+      <div className="absolute inset-0">
+        <img
+          src="/images/hero-magnolia.jpg"
+          alt="Ambiente intimista da Magnolia Lunar"
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+
+      <div className="relative z-10 space-y-4">
+        <p className="text-xs uppercase tracking-[0.2em] text-slate-300">
+          Magnolia Lunar • Lisboa
+        </p>
+        <h1 className="text-3xl font-semibold leading-tight">
+          Um dia relaxante para corpo, mente e sentidos.
+        </h1>
+        <p className="text-sm text-slate-300">
+          Massagens sensoriais em ambiente reservado, com total discrição e cuidado.
+        </p>
+        <a
+          href="https://wa.me/351962252659"
+          className="mt-4 inline-flex items-center justify-center rounded-full bg-[#D4AF37] px-6 py-3 text-sm font-medium text-slate-950"
+        >
+          Agendar sessão no WhatsApp
+        </a>
+      </div>
+    </section>
+  )
+}

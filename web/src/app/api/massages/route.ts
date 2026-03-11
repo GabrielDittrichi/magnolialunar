@@ -1,0 +1,113 @@
+import { NextResponse } from "next/server"
+import { getPool, initDB, safeParseArray } from "@/lib/db"
+import { promises as fs } from "fs"
+import path from "path"
+const dataPath = path.join(process.cwd(), "src", "data", "massages.json")
+
+export async function GET() {
+  try {
+    await initDB()
+    const pool = getPool()
+    const [rows] = await pool.query(`
+      SELECT slug, title, description, duration, price, image, therapists
+      FROM massages
+      ORDER BY title ASC
+    `)
+    const list = (rows as any[]).map(r => ({
+      slug: r.slug,
+      id: r.slug,
+      title: r.title,
+      description: r.description || "",
+      duration: r.duration || "60 min",
+      price: Number(r.price ?? 0),
+      image: r.image || "",
+      therapists: safeParseArray(r.therapists),
+    }))
+    return NextResponse.json(list)
+  } catch {
+    const raw = await fs.readFile(dataPath, "utf-8").catch(() => "[]")
+    const data = JSON.parse(raw || "[]")
+    return NextResponse.json(data)
+  }
+}
+
+export async function POST(request: Request) {
+  const payload = await request.json()
+  try {
+    await initDB()
+    const pool = getPool()
+    const [existsRows] = await pool.query(`SELECT slug FROM massages WHERE slug = ?`, [payload.slug])
+    if ((existsRows as any[]).length > 0) return NextResponse.json({ error: "exists" }, { status: 409 })
+    await pool.query(`
+      INSERT INTO massages (id, slug, title, description, duration, price, image, therapists)
+      VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?)
+    `, [
+      payload.slug,
+      payload.title,
+      payload.description || "",
+      payload.duration || "60 min",
+      Number(payload.price || 0),
+      payload.image || "",
+      JSON.stringify(payload.therapists || []),
+    ])
+    return NextResponse.json({ ok: true })
+  } catch {
+    const raw = await fs.readFile(dataPath, "utf-8").catch(() => "[]")
+    const data = JSON.parse(raw || "[]")
+    const exists = data.some((m: any) => m.slug === payload.slug)
+    if (exists) return NextResponse.json({ error: "exists" }, { status: 409 })
+    data.push(payload)
+    await fs.writeFile(dataPath, JSON.stringify(data, null, 2))
+    return NextResponse.json({ ok: true }, { headers: { "X-Data-Source": "fallback" } })
+  }
+}
+
+export async function PUT(request: Request) {
+  const payload = await request.json()
+  try {
+    await initDB()
+    const pool = getPool()
+    const [existsRows] = await pool.query(`SELECT slug FROM massages WHERE slug = ?`, [payload.slug])
+    if ((existsRows as any[]).length === 0) return NextResponse.json({ error: "not_found" }, { status: 404 })
+    await pool.query(`
+      UPDATE massages
+      SET title = ?, description = ?, duration = ?, price = ?, image = ?, therapists = ?
+      WHERE slug = ?
+    `, [
+      payload.title,
+      payload.description || "",
+      payload.duration || "60 min",
+      Number(payload.price || 0),
+      payload.image || "",
+      JSON.stringify(payload.therapists || []),
+      payload.slug,
+    ])
+    return NextResponse.json({ ok: true })
+  } catch {
+    const raw = await fs.readFile(dataPath, "utf-8").catch(() => "[]")
+    const data = JSON.parse(raw || "[]")
+    const idx = data.findIndex((m: any) => m.slug === payload.slug)
+    if (idx === -1) return NextResponse.json({ error: "not_found" }, { status: 404 })
+    data[idx] = payload
+    await fs.writeFile(dataPath, JSON.stringify(data, null, 2))
+    return NextResponse.json({ ok: true }, { headers: { "X-Data-Source": "fallback" } })
+  }
+}
+
+export async function DELETE(request: Request) {
+  const { searchParams } = new URL(request.url)
+  const slug = searchParams.get("slug")
+  if (!slug) return NextResponse.json({ error: "missing_slug" }, { status: 400 })
+  try {
+    await initDB()
+    const pool = getPool()
+    await pool.query(`DELETE FROM massages WHERE slug = ?`, [slug])
+    return NextResponse.json({ ok: true })
+  } catch {
+    const raw = await fs.readFile(dataPath, "utf-8").catch(() => "[]")
+    const data = JSON.parse(raw || "[]")
+    const next = data.filter((m: any) => m.slug !== slug)
+    await fs.writeFile(dataPath, JSON.stringify(next, null, 2))
+    return NextResponse.json({ ok: true })
+  }
+}

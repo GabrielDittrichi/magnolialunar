@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@theme {
+  /* Cores extraídas da referência Royal Therapy Spa - Ajustadas para acessibilidade (WCAG AA) */
+  --color-gold: #8B7040; /* Gold mais escuro (Antique Gold) para passar no contraste 4.5:1 em fundo branco */
+  --color-gold-light: #C5A266; /* Gold original mais claro - USAR APENAS EM FUNDOS ESCUROS */
+  --color-primary: var(--color-gold);
+  --color-primary-hover: #6D542E; /* Versão mais escura para hover */
+  
+  --color-green-btn: #6B8E6B; /* Verde musgo do botão */
+  --color-green-btn-hover: #5A7A5A;
+  
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-montserrat);
+  --font-philosopher: var(--font-philosopher);
+}
+
+:root {
+  /* Light theme (User request: Background branco majoritariamente) */
+  --background: #ffffff;
+  --foreground: #334155; /* Slate-700 */
+  --foreground-heading: #0f172a; /* Slate-900 para títulos (quase preto) */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7; /* Maior espaçamento entre linhas para elegância */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif), serif;
+  color: var(--foreground-heading);
+}
+
+/* Allow text color overrides */
+:where(h1, h2, h3, h4, h5, h6)[class*="text-"] {
+  color: inherit;
+}
+
+.font-serif {
+  font-family: var(--font-serif), serif;
+}
+
+.font-philosopher {
+  font-family: var(--font-philosopher), serif;
+}
+
+/* Utilitários de luxo */
+.tracking-luxury {
+  letter-spacing: 0.2em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}

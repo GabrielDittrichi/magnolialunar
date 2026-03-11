@@ -1,0 +1,42 @@
+[
+  {
+    "id": "tantrica",
+    "title": "Massagem Tântrica",
+    "slug": "massagem-tantrica",
+    "description": "Uma jornada de autoconhecimento e despertar sensorial, expandindo a sua capacidade de sentir prazer.",
+    "duration": "60 min",
+    "price": 150,
+    "image": "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop",
+    "therapists": ["beatriz", "isabella"]
+  },
+  {
+    "id": "nuru",
+    "title": "Massagem Nuru",
+    "slug": "massagem-nuru",
+    "description": "Técnica japonesa corpo a corpo com gel especial, proporcionando um contato íntimo e deslizante.",
+    "duration": "60 min",
+    "price": 200,
+    "image": "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=2574&auto=format&fit=crop",
+    "therapists": ["beatriz", "sofia"]
+  },
+  {
+    "id": "lingam",
+    "title": "Massagem Lingam",
+    "slug": "massagem-lingam",
+    "description": "Focada na saúde masculina e vitalidade, utilizando toques precisos para desbloquear energias.",
+    "duration": "60 min",
+    "price": 180,
+    "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop",
+    "therapists": ["sofia"]
+  },
+  {
+    "id": "relaxante",
+    "title": "Massagem Relaxante",
+    "slug": "massagem-relaxante",
+    "description": "Movimentos suaves e rítmicos para aliviar tensões musculares e promover relaxamento profundo.",
+    "duration": "60 min",
+    "price": 120,
+    "image": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop",
+    "therapists": ["isabella"]
+  }
+]

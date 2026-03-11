@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Beatriz",
+    "slug": "beatriz",
+    "bio": "Loira dos olhos castanhos\naltura:1,57\npeso:60kg\nidade:32 anos\nbrasileira",
+    "mainImage": "/images/therapists/beatriz/main.jpeg",
+    "gallery": [
+      "/images/therapists/beatriz/gallery-1.png",
+      "/images/therapists/beatriz/gallery-2.png",
+      "/images/therapists/beatriz/gallery-3.png",
+      "/images/therapists/beatriz/gallery-4.png",
+      "/images/therapists/beatriz/gallery-5.png",
+      "/images/therapists/beatriz/gallery-6.png",
+      "/images/therapists/beatriz/gallery-7.jpeg",
+      "/images/therapists/beatriz/gallery-8.jpeg",
+      "/images/therapists/beatriz/gallery-9.jpeg",
+      "/images/therapists/beatriz/gallery-10.jpeg"
+    ]
+  },
+  {
+    "name": "Luiza",
+    "slug": "luiza",
+    "bio": "",
+    "mainImage": "/images/therapists/luiza/main.jpg",
+    "gallery": [
+      "/images/therapists/luiza/gallery-1.jpg",
+      "/images/therapists/luiza/gallery-2.jpg",
+      "/images/therapists/luiza/gallery-3.jpg",
+      "/images/therapists/luiza/gallery-4.jpg",
+      "/images/therapists/luiza/gallery-5.jpg",
+      "/images/therapists/luiza/gallery-6.jpg"
+    ]
+  },
+  {
+    "name": "Mariha",
+    "slug": "mariha",
+    "bio": "Loira dos olhos verdes\naltura:1,66\npeso:55kg\nidade:26 anos\nbrasileira\n\nMariha é especialista em massagens eróticas e sensuais, oferecendo uma experiência exclusiva de relaxamento, prazer e conexão. Com técnica refinada e uma abordagem cuidadosa, ela proporciona momentos de intensa sensação e bem-estar",
+    "mainImage": "/images/therapists/mariha/main.jpg",
+    "gallery": [
+      "/images/therapists/mariha/gallery-1.jpg",
+      "/images/therapists/mariha/gallery-2.jpg",
+      "/images/therapists/mariha/gallery-3.jpg",
+      "/images/therapists/mariha/gallery-4.jpg"
+    ]
+  }
+]

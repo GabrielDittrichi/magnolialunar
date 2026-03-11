@@ -1,0 +1,50 @@
+[
+  {
+    "id": "diana",
+    "name": "Diana",
+    "slug": "diana",
+    "specialties": [
+      "Massagem Nuru",
+      "Massagem a 4 Mãos",
+      "Massagem Casal",
+      "Massagem Shower",
+      "Massagem Mútua",
+      "Massagem Body to Body"
+    ],
+    "image": "",
+    "bio": "",
+    "phone": "",
+    "gallery": []
+  },
+  {
+    "id": "luiza",
+    "name": "Luiza",
+    "slug": "luiza",
+    "specialties": [
+      "Massagem Nuru",
+      "Massagem a 4 Mãos",
+      "Massagem Casal",
+      "Massagem Shower",
+      "Massagem Mútua",
+      "Massagem Body to Body"
+    ],
+    "image": "",
+    "bio": "",
+    "phone": "",
+    "gallery": []
+  },
+  {
+    "id": "ddd",
+    "name": "ddd",
+    "slug": "ddd",
+    "specialties": [
+      "Massagem Tântrica",
+      "Massagem Lingam",
+      "Massagem Relaxante"
+    ],
+    "image": "d",
+    "bio": "d",
+    "phone": "d",
+    "gallery": []
+  }
+]
