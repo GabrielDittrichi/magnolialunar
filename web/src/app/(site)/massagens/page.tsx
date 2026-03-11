@@ -55,9 +55,10 @@ export default async function MassagesPage() {
             <div key={massage.id} className="group relative overflow-hidden bg-white shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
               <div className="relative h-64 w-full overflow-hidden">
                 <Image
-                  src={massage.image || massage.fallbackImage}
+                  src={massage.image || massage.fallbackImage || "/images/placeholder.jpg"}
                   alt={massage.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
@@ -88,6 +89,7 @@ export default async function MassagesPage() {
                               src={therapist.image} 
                               alt={therapist.name}
                               fill
+                              sizes="32px"
                               className="object-cover"
                             />
                           ) : (

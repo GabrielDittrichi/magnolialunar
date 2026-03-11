@@ -76,7 +76,7 @@ export default async function MassageDetailsPage({ params }: { params: Promise<{
        const mappedSlug = slugMap[slug];
        const reFetch = await getMassageBySlug(mappedSlug) as Massage | null;
        if (reFetch) {
-         return <MassageDetailView massage={reFetch} />
+         return <MassageDetailView massage={reFetch} therapists={[]} />
        }
      }
 
@@ -117,7 +117,7 @@ export default async function MassageDetailsPage({ params }: { params: Promise<{
      ].find(m => m.slug === slug)
 
      if (fallback) {
-        return <MassageDetailView massage={{...fallback, image: null, fallbackImage: fallback.image}} />
+        return <MassageDetailView massage={{...fallback, image: null, fallbackImage: fallback.image}} therapists={[]} />
      }
 
      return notFound()
