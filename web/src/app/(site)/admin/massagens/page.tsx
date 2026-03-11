@@ -2,15 +2,10 @@ import Image from "next/image"
 import Link from "next/link"
 import MassageForm from "./_form"
 import DeleteMassageButton from "./_delete-button"
-
-async function getData() {
-  const base = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-  const res = await fetch(`${base}/api/massages`, { cache: "no-store" })
-  return res.json()
-}
+import { getMassages } from "@/lib/db"
 
 export default async function AdminMassagesPage() {
-  const massages = await getData()
+  const massages = await getMassages()
   return (
     <main className="min-h-screen pt-32 pb-24 bg-white">
       <div className="container mx-auto px-6">

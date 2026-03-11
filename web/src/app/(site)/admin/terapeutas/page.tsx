@@ -2,12 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import TherapistForm from "./_form"
 import DeleteButton from "./_delete-button"
-
-async function getTherapists() {
-  const base = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-  const res = await fetch(`${base}/api/therapists`, { cache: "no-store" })
-  return res.json()
-}
+import { getTherapists } from "@/lib/db"
 
 function ImageCell({ src, alt }: { src?: string, alt: string }) {
   return (
