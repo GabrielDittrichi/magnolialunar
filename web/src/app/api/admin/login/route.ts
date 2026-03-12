@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createSessionToken } from "@/lib/auth";
+import { createSessionToken } from "@/lib/auth-core";
 
 export async function POST(request: NextRequest) {
   const { username, password } = await request.json();
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const token = createSessionToken();
+  const token = await createSessionToken();
   const response = NextResponse.json({ ok: true });
 
   response.cookies.set("admin_session", token, {
