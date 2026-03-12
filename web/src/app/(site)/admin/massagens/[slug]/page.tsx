@@ -1,8 +1,13 @@
 import Link from "next/link"
 import MassageEditForm from "../_edit-form"
 import { getMassageBySlug } from "@/lib/db"
+import { getSession } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
 export default async function AdminEditMassagePage({ params }: { params: Promise<{ slug: string }> }) {
+  const isAuthenticated = await getSession()
+  if (!isAuthenticated) redirect("/admin/login")
+
   const { slug } = await params
   const massage = await getMassageBySlug(slug)
   return (

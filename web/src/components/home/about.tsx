@@ -14,7 +14,7 @@ export function About() {
              <FadeIn delay={0.2} duration={0.8} className="relative h-[600px] w-full">
                 <div className="absolute inset-0 bg-slate-200 overflow-hidden rounded-sm">
                   <Image
-                    src="https://images.unsplash.com/photo-1620733723572-11c52f7c2d82?q=80&w=1974&auto=format&fit=crop"
+                    src="https://pub-b0c6576fd7ce4550917b484175556894.r2.dev/space/magnolia-lunar-1773339420841-WhatsAppImage2026-03-11at12.04.02.jpeg"
                     alt="Interior do Magnolia Lunar"
                     fill
                     className="object-cover transition-transform duration-[2s] hover:scale-105"
@@ -25,7 +25,7 @@ export function About() {
                 <div className="absolute -bottom-12 -right-12 w-64 h-80 bg-white p-2 shadow-2xl hidden md:block rounded-sm">
                    <div className="relative w-full h-full overflow-hidden bg-slate-100">
                     <Image
-                        src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop"
+                        src="https://pub-b0c6576fd7ce4550917b484175556894.r2.dev/space/magnolia-lunar-1773339418935-WhatsAppImage2026-03-11at12.04.021.jpeg"
                         alt="Detalhe massagem"
                         fill
                         className="object-cover"

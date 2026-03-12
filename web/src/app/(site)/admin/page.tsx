@@ -1,9 +1,15 @@
 import Link from "next/link"
 import { getTherapists, getMassages } from "@/lib/db"
+import { getSession } from "@/lib/auth"
+import { redirect } from "next/navigation"
+import AdminLogoutButton from "./_logout-button"
 
 export const dynamic = 'force-dynamic'
 
 export default async function AdminPage() {
+  const isAuthenticated = await getSession()
+  if (!isAuthenticated) redirect("/admin/login")
+
   const [therapists, massages] = await Promise.all([
     getTherapists(),
     getMassages(),
@@ -15,9 +21,12 @@ export default async function AdminPage() {
   }
 
   return (
-    <main className="min-h-screen pt-32 pb-24 bg-white">
+    <main className="min-h-screen pt-32 pb-24 bg-white relative">
       <div className="container mx-auto px-6">
-        <h1 className="text-4xl font-serif text-slate-900 mb-8">Admin</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-serif text-slate-900">Admin</h1>
+          <AdminLogoutButton />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="border border-slate-200 p-6 rounded-sm">
             <h2 className="text-2xl font-serif mb-2">Terapeutas</h2>

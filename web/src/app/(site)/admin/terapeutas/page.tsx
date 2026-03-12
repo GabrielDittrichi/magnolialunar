@@ -3,6 +3,8 @@ import Link from "next/link"
 import TherapistForm from "./_form"
 import DeleteButton from "./_delete-button"
 import { getTherapists } from "@/lib/db"
+import { getSession } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
 function ImageCell({ src, alt }: { src?: string, alt: string }) {
   return (
@@ -17,6 +19,9 @@ function SpecialtiesCell({ specialties }: { specialties?: string[] }) {
 }
 
 export default async function AdminTherapistsPage() {
+  const isAuthenticated = await getSession()
+  if (!isAuthenticated) redirect("/admin/login")
+
   const therapists = await getTherapists()
   return (
     <main className="min-h-screen pt-32 pb-24 bg-white">

@@ -3,8 +3,13 @@ import Link from "next/link"
 import MassageForm from "./_form"
 import DeleteMassageButton from "./_delete-button"
 import { getMassages } from "@/lib/db"
+import { getSession } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
 export default async function AdminMassagesPage() {
+  const isAuthenticated = await getSession()
+  if (!isAuthenticated) redirect("/admin/login")
+
   const massages = await getMassages()
   return (
     <main className="min-h-screen pt-32 pb-24 bg-white">

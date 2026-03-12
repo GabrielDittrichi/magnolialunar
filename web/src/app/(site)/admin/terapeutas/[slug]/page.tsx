@@ -1,8 +1,13 @@
 import Link from "next/link"
 import TherapistEditForm from "../_edit-form"
 import { getTherapistBySlug } from "@/lib/db"
+import { getSession } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
 export default async function AdminEditTherapistPage({ params }: { params: Promise<{ slug: string }> }) {
+  const isAuthenticated = await getSession()
+  if (!isAuthenticated) redirect("/admin/login")
+
   const { slug } = await params
   const therapist = await getTherapistBySlug(slug)
   return (

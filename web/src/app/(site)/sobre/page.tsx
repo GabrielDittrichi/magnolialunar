@@ -7,6 +7,8 @@ import { Calendar, Sparkles, UserCheck, ArrowRight } from "lucide-react"
 import { FALLBACK_THERAPISTS } from "@/data/fallback-data"
 import { getTherapists } from "@/lib/db"
 
+import { VideoPlayer } from "@/components/ui/video-player"
+
 export const revalidate = 60;
 
 export const metadata: Metadata = {
@@ -24,25 +26,25 @@ interface Therapist {
 
 const spaceImages = [
   {
-    src: "https://images.unsplash.com/photo-1620733723572-11c52f7c2d82?q=80&w=1974&auto=format&fit=crop",
+    src: "https://pub-b0c6576fd7ce4550917b484175556894.r2.dev/space/magnolia-lunar-1773339421593-WhatsAppImage2026-03-11at12.04.03.jpeg",
     alt: "Recepção Magnolia Lunar",
     colSpan: "md:col-span-2",
     height: "h-64 md:h-96"
   },
   {
-    src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070&auto=format&fit=crop",
+    src: "https://pub-b0c6576fd7ce4550917b484175556894.r2.dev/space/magnolia-lunar-1773339420841-WhatsAppImage2026-03-11at12.04.02.jpeg",
     alt: "Sala de Massagem",
     colSpan: "md:col-span-1",
     height: "h-64 md:h-96"
   },
   {
-    src: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop",
+    src: "https://pub-b0c6576fd7ce4550917b484175556894.r2.dev/space/magnolia-lunar-1773339418935-WhatsAppImage2026-03-11at12.04.021.jpeg",
     alt: "Detalhes do Espaço",
     colSpan: "md:col-span-1",
     height: "h-64"
   },
   {
-    src: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop",
+    src: "https://pub-b0c6576fd7ce4550917b484175556894.r2.dev/space/magnolia-lunar-1773339420841-WhatsAppImage2026-03-11at12.04.02.jpeg",
     alt: "Ambiente Relaxante",
     colSpan: "md:col-span-2",
     height: "h-64"
@@ -106,6 +108,16 @@ export default async function AboutPage() {
             </FadeInItem>
           ))}
         </FadeInStagger>
+      </section>
+
+      {/* Video Section */}
+      <section className="container mx-auto px-6 mb-24 flex justify-center">
+        <FadeIn className="w-full max-w-md">
+          <VideoPlayer 
+            src="https://pub-b0c6576fd7ce4550917b484175556894.r2.dev/space/magnolia-lunar-1773339422917-WhatsAppVideo2026-03-11at12.04.02.mp4"
+            className="w-full aspect-[9/16] shadow-2xl bg-black"
+          />
+        </FadeIn>
       </section>
 
       {/* How it Works Section */}
