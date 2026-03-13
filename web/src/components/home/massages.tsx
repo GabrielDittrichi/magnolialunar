@@ -16,7 +16,20 @@ interface Massage {
 const PLACEHOLDER_IMAGE = "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop"
 
 export async function Massages() {
-  const massages = await getMassages() as Massage[]
+  const allMassages = await getMassages() as Massage[]
+  
+  // Filter for specific massages: Corpo a Corpo, Mútua, Nuru
+  const highlightSlugs = ['massagem-corpo-a-corpo', 'massagem-mutua', 'massagem-nuru'];
+  // Also try matching by title if slug doesn't match (for flexibility)
+  const highlightTitles = ['Massagem Corpo a Corpo', 'Massagem Mútua', 'Massagem Nuru'];
+
+  const massages = allMassages.filter(m => 
+    highlightSlugs.includes(m.slug) || highlightTitles.some(t => m.title.includes(t) || m.title === t)
+  );
+
+  // If no matches found (e.g. initial seed data might be different), fallback to first 3 or specific ones
+  // ensuring we show something.
+  const displayMassages = massages.length > 0 ? massages : allMassages.slice(0, 3);
 
   return (
     <section className="py-8 bg-[#ffffff]">

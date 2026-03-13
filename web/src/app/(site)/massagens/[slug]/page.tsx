@@ -88,7 +88,7 @@ export default async function MassageDetailsPage({ params }: { params: Promise<{
           description: "Uma jornada de autoconhecimento e despertar sensorial, expandindo a sua capacidade de sentir prazer. A massagem tântrica é uma arte milenar que busca conectar o ser humano com sua essência vital através do toque consciente e da respiração.",
           image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop",
           duration: "60 min",
-          price: 150
+          // price removed
         },
         {
           slug: "nuru",
@@ -96,7 +96,7 @@ export default async function MassageDetailsPage({ params }: { params: Promise<{
           description: "Técnica japonesa corpo a corpo com gel especial, proporcionando um contato íntimo e deslizante. O gel Nuru é feito à base de algas marinhas, incolor e inodoro, permitindo um deslizamento perfeito entre os corpos.",
           image: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=2574&auto=format&fit=crop",
           duration: "60 min",
-          price: 200
+          // price removed
         },
         {
           slug: "lingam",
@@ -104,7 +104,7 @@ export default async function MassageDetailsPage({ params }: { params: Promise<{
           description: "Focada na saúde masculina e vitalidade, utilizando toques precisos para desbloquear energias.",
           image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop",
           duration: "60 min",
-          price: 180
+          // price removed
         },
         {
           slug: "relaxante",
@@ -112,7 +112,7 @@ export default async function MassageDetailsPage({ params }: { params: Promise<{
           description: "Movimentos suaves e rítmicos para aliviar tensões musculares e promover relaxamento profundo.",
           image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop",
           duration: "60 min",
-          price: 120
+          // price removed
         }
      ].find(m => m.slug === slug)
 
@@ -169,12 +169,6 @@ function MassageDetailView({ massage, therapists }: { massage: Massage, therapis
                        <span className="text-sm uppercase tracking-wider">{massage.duration}</span>
                    </div>
                )}
-               {massage.price && (
-                   <div className="flex items-center gap-2">
-                       <Tag className="h-5 w-5 text-gold" />
-                       <span className="text-sm uppercase tracking-wider">{typeof massage.price === 'number' ? `€${massage.price}` : massage.price}</span>
-                   </div>
-               )}
             </div>
 
             <div className="prose prose-slate max-w-none mb-10">
@@ -183,9 +177,14 @@ function MassageDetailView({ massage, therapists }: { massage: Massage, therapis
               </p>
             </div>
 
-            <button className="bg-slate-900 text-white px-10 py-4 uppercase tracking-widest text-xs font-bold hover:bg-gold transition-colors duration-300 w-fit">
+            <a 
+              href={`https://wa.me/351962252659?text=${encodeURIComponent(`Olá, gostaria de agendar a ${massage.title}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-slate-900 text-white px-10 py-4 uppercase tracking-widest text-xs font-bold hover:bg-gold transition-colors duration-300 w-fit inline-block"
+            >
               Agendar Agora
-            </button>
+            </a>
           </div>
         </div>
 
