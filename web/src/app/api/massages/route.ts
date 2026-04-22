@@ -5,6 +5,7 @@ import path from "path"
 import { revalidatePath } from "next/cache"
 
 const dataPath = path.join(process.cwd(), "src", "data", "massages.json")
+const therapistsDataPath = path.join(process.cwd(), "src", "data", "therapists.json")
 
 export async function GET() {
   try {
@@ -113,16 +114,56 @@ export async function DELETE(request: Request) {
   try {
     await initDB()
     const pool = getPool()
+
+    // Cascade delete: remove massage slug from all therapists
+    try {
+      const [therapists] = await pool.query(`SELECT slug, specialties FROM therapists`)
+      for (const t of (therapists as any[])) {
+        const sList = safeParseArray(t.specialties)
+        if (sList.includes(slug)) {
+          const nextSList = sList.filter(s => s !== slug)
+          await pool.query(`UPDATE therapists SET specialties = ? WHERE slug = ?`, [
+            JSON.stringify(nextSList),
+            t.slug
+          ])
+        }
+      }
+    } catch (e) {
+      console.error("Failed to cascade delete in MySQL:", e)
+    }
+
     await pool.query(`DELETE FROM massages WHERE slug = ?`, [slug])
     
     // Revalidate paths to update cache
     revalidatePath("/massagens")
     revalidatePath("/admin/massagens")
     revalidatePath(`/massagens/${slug}`)
+    revalidatePath("/terapeutas")
+    revalidatePath("/admin/terapeutas")
     
     return NextResponse.json({ ok: true })
   } catch (error) {
     console.error("Error deleting massage (MySQL):", error)
+
+    // Fallback JSON cascade
+    try {
+      const tRaw = await fs.readFile(therapistsDataPath, "utf-8").catch(() => "[]")
+      const therapists = JSON.parse(tRaw || "[]")
+      let changed = false
+      const nextTherapists = therapists.map((t: any) => {
+        if (t.specialties && Array.isArray(t.specialties) && t.specialties.includes(slug)) {
+          t.specialties = t.specialties.filter((s: string) => s !== slug)
+          changed = true
+        }
+        return t
+      })
+      if (changed) {
+        await fs.writeFile(therapistsDataPath, JSON.stringify(nextTherapists, null, 2))
+      }
+    } catch (e) {
+      console.error("Failed to cascade delete in JSON:", e)
+    }
+
     const raw = await fs.readFile(dataPath, "utf-8").catch(() => "[]")
     const data = JSON.parse(raw || "[]")
     const next = data.filter((m: any) => m.slug !== slug)
